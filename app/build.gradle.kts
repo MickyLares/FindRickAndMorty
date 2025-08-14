@@ -59,6 +59,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.navigationCompose)
 
     implementation(libs.koin.android.v350)
     implementation(libs.koin.compose.viewmodel)
@@ -71,6 +72,7 @@ dependencies {
     implementation(libs.ktor.serialization)
     implementation(libs.ktor.negotiation)
     implementation(libs.ktor.cio)
+
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
 
