@@ -36,7 +36,7 @@ fun App() {
             val navController = rememberNavController()
             NavHost(navController = navController, startDestination = MainDestination) {
                 composable<MainDestination> {
-                    MainScreen { id ->
+                    MainScreen(navController) { id ->
 
                     }
                 }

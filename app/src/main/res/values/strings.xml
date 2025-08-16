@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">RickAndMortyFinder</string>
+    <string name="text_onBoarding_page_1">Bienvenido a Rick 616, el Gobierno de la Ciudadela, te ha asignado la tarea de perseguir a la Resistencia</string>
+    <string name="text_onBoarding_page_2">para lograr tu misión, hemos actualizado el sistema de tu finder a la version ML137, con esta actualización, tendras acceso al listado de objetivos y su ubicación</string>
+    <string name="text_onBoarding_page_3">Una vez elimines a los objetivos, podrás marcar al sujeto como eliminado para actualizar su información a la base de datos de la Ciudadela.</string>
 </resources>

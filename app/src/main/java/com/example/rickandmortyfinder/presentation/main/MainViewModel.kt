@@ -16,8 +16,8 @@ class MainViewModel(
     private val preferenceRepository: PreferenceRepository
 ) : ViewModel() {
     private val _characters = MutableStateFlow<List<CharacterDomain>>(emptyList())
-    private val _showOnBoading = MutableStateFlow<Boolean?>(null)
-    val showOnBoarding: StateFlow<Boolean?> = _showOnBoading
+    private val _showOnBoarding = MutableStateFlow<Boolean>(true)
+    val showOnBoarding: StateFlow<Boolean> = _showOnBoarding
 
     val characters: StateFlow<List<CharacterDomain>> = _characters
         .stateIn(
@@ -34,14 +34,14 @@ class MainViewModel(
     private fun getPreferences() {
         viewModelScope.launch {
             val pref = preferenceRepository.getPreference()
-            _showOnBoading.value = pref.showOnBoarding
+            _showOnBoarding.value = pref.showOnBoarding
         }
     }
 
     fun onBoardingFinished(){
         viewModelScope.launch {
             preferenceRepository.disableOnBoarding()
-            _showOnBoading.value = false
+            _showOnBoarding.value = false
         }
     }
     private fun fetchCharacters() {

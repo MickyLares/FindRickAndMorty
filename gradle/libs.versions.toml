@@ -18,6 +18,7 @@ roomVersion = "2.7.2"
 appcompatVersion = "1.7.1"
 materialVersion = "1.12.0"
 navigationCompose = "2.9.3"
+constraintlayout-compose = "1.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +43,7 @@ landscapist-coil = { module = "com.github.skydoves:landscapist-coil", version.re
 serialization-kotlin = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "version-serialization" }
 
 androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
+androidx-foundation-layout = {module = "androidx.compose.foundation:foundation-layout", version.ref = "foundation"}
 androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorVersion" }
 ktor-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorVersion" }
@@ -54,6 +56,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 navigationCompose = {module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose"}
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+
+constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

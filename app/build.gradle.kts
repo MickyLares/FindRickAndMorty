@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.serialization.kotlin)
     implementation(libs.androidx.foundation)
+    implementation(libs.androidx.foundation.layout)
 
     implementation(libs.ktor.core)
     implementation(libs.ktor.android)
@@ -80,6 +81,7 @@ dependencies {
 
     implementation(libs.landscapist.coil)
     implementation(libs.androidx.animation)
+    implementation(libs.constraintlayout.compose)
 
     implementation("androidx.navigation:navigation-compose:2.8.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
