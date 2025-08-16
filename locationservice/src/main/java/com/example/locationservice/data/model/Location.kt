@@ -9,17 +9,17 @@ import kotlinx.serialization.Serializable
 @Entity(tableName = "locations")
 data class Location(
     @SerialName("created")
-    val created: String?,
+    val created: String = "",
     @SerialName("dimension")
-    val dimension: String?,
+    val dimension: String = "",
     @SerialName("id")
     @PrimaryKey val id: Int = 0,
     @SerialName("name")
-    val name: String?,
+    val name: String = "",
     @SerialName("residents")
-    val residents: List<String?>?,
+    val residents: List<String> = emptyList(),
     @SerialName("type")
-    val type: String?,
+    val type: String = "",
     @SerialName("url")
-    val url: String?
+    val url: String = ""
 )

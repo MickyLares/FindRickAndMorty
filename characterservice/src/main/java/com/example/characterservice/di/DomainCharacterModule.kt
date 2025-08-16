@@ -9,7 +9,7 @@ import com.example.characterservice.utils.DefaultCharacterListMapper
 import org.koin.dsl.module
 
 val domainCharacterModule = module {
-    factory<CharacterMappers> { DefaultCharacterListMapper() }
+    factory<CharacterMappers> { DefaultCharacterListMapper() as CharacterMappers}
     factory<GetCharacterUseCase> { DefaultGetCharacterUseCase(get(), get()) }
     factory <GetCharacterByIdUseCase> { DefaultGetCharacterByIdUseCase(get(), get()) }
 }

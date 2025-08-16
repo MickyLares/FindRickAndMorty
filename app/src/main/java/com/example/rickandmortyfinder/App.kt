@@ -8,13 +8,14 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.rickandmortyfinder.presentation.main.MainScreen
 import kotlinx.serialization.Serializable
 
 
-
 @Serializable
-object MainDestinatiom
+object MainDestination
 
 @Serializable
 object LocationDestination
@@ -33,8 +34,12 @@ fun App() {
     ) {
         Surface {
             val navController = rememberNavController()
-            NavHost(navController = navController, startDestination = MainDestinatiom){
+            NavHost(navController = navController, startDestination = MainDestination) {
+                composable<MainDestination> {
+                    MainScreen { id ->
 
+                    }
+                }
             }
         }
     }

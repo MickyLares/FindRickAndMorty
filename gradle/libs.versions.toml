@@ -53,6 +53,7 @@ room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompatVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 navigationCompose = {module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose"}
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

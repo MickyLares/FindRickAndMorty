@@ -1,5 +1,6 @@
 package com.example.characterservice.data.repository
 import com.example.characterservice.data.dataSource.implementation.RemoteCharacterDataSource
+import com.example.characterservice.data.dataSource.interfaces.CharacterDataSource
 import com.example.characterservice.data.model.Character
 interface CharacterRepository{
     suspend fun init()
@@ -8,7 +9,7 @@ interface CharacterRepository{
 }
 
 class DefaultCharacterRepository(
-    private val remoteCharacterDataSource: RemoteCharacterDataSource
+    private val remoteCharacterDataSource: CharacterDataSource
 ):CharacterRepository{
     override suspend fun init() {
         refresh()

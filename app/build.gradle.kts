@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.24"
+    id("kotlin-kapt")
 }
 
 android {
@@ -78,6 +80,11 @@ dependencies {
 
     implementation(libs.landscapist.coil)
     implementation(libs.androidx.animation)
+
+    implementation("androidx.navigation:navigation-compose:2.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+
+    kapt(libs.room.compiler)
 
 
 

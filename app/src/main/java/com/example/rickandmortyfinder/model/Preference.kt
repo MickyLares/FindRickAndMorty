@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 data class Preference(
     @PrimaryKey
     val id: Int = 0,
-    val showOnBoarding: Boolean,
-    val charactersDeleted: List<Int>
+    val showOnBoarding: Boolean = true,
+    val charactersDeleted: List<Int> = emptyList()
     )

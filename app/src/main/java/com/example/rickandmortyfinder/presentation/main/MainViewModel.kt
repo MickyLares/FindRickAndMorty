@@ -4,18 +4,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.characterservice.domain.model.CharacterDomain
 import com.example.characterservice.domain.useCase.GetCharacterUseCase
-import com.example.rickandmortyfinder.db.PreferenceDao
+import com.example.rickandmortyfinder.data.PreferenceRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class MainViewModel (
+class MainViewModel(
     private val getCharacterUseCase: GetCharacterUseCase,
-    private val preferenceDao: PreferenceDao
-): ViewModel(){
+    private val preferenceRepository: PreferenceRepository
+) : ViewModel() {
     private val _characters = MutableStateFlow<List<CharacterDomain>>(emptyList())
+    private val _showOnBoading = MutableStateFlow<Boolean?>(null)
+    val showOnBoarding: StateFlow<Boolean?> = _showOnBoading
+
     val characters: StateFlow<List<CharacterDomain>> = _characters
         .stateIn(
             viewModelScope,
@@ -24,9 +27,23 @@ class MainViewModel (
         )
 
     init {
+        getPreferences()
         fetchCharacters()
     }
 
+    private fun getPreferences() {
+        viewModelScope.launch {
+            val pref = preferenceRepository.getPreference()
+            _showOnBoading.value = pref.showOnBoarding
+        }
+    }
+
+    fun onBoardingFinished(){
+        viewModelScope.launch {
+            preferenceRepository.disableOnBoarding()
+            _showOnBoading.value = false
+        }
+    }
     private fun fetchCharacters() {
         viewModelScope.launch {
             _characters.value = getCharacterUseCase.execute()

@@ -1,6 +1,7 @@
 package com.example.rickandmortyfinder.di
 
 import androidx.room.Room
+import com.example.rickandmortyfinder.data.PreferenceRepository
 import com.example.rickandmortyfinder.db.AppDataBase
 import com.example.rickandmortyfinder.db.PreferenceDao
 import org.koin.dsl.module
@@ -11,5 +12,6 @@ val dataAppModule = module {
             .fallbackToDestructiveMigration(false)
             .build()
     }
-    single<PreferenceDao> { get<AppDataBase>().preferenceDao()  }
+    single<PreferenceDao> { get<AppDataBase>().preferenceDao() }
+    single { PreferenceRepository(get()) }
 }
