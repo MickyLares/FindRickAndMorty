@@ -10,6 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.example.rickandmortyfinder.presentation.main.DetailsCharacters.detailCharacterScreen
 import com.example.rickandmortyfinder.presentation.main.MainScreen
 import kotlinx.serialization.Serializable
 
@@ -37,7 +39,12 @@ fun App() {
             NavHost(navController = navController, startDestination = MainDestination) {
                 composable<MainDestination> {
                     MainScreen(navController) { id ->
-
+                       navController.navigate(DetailsCharacterDestination(id))
+                    }
+                }
+                composable <DetailsCharacterDestination>{ navBackStackentry->
+                    detailCharacterScreen(id = navBackStackentry.toRoute<DetailsCharacterDestination>().id) {
+                        navController.popBackStack()
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.rickandmortyfinder.presentation.main
+package com.example.rickandmortyfinder.presentation.main.onBoarding
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,6 +17,7 @@ import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -28,9 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavController
 import com.example.rickandmortyfinder.MainDestination
 import com.example.rickandmortyfinder.R
+import com.example.rickandmortyfinder.presentation.main.MainViewModel
 
 @Composable
 fun OnBoardingScreen(navController: NavController, viewModel: MainViewModel) {
@@ -51,7 +54,7 @@ fun OnBoardingScreen(navController: NavController, viewModel: MainViewModel) {
                     bottom.linkTo(indicator.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    height = androidx.constraintlayout.compose.Dimension.fillToConstraints
+                    height = Dimension.fillToConstraints
                 }
         ) { page ->
             when (page) {
@@ -102,6 +105,11 @@ fun PagerScreen(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
+            .border(
+                width = 0.5.dp,
+                color = colorResource(R.color.black),
+                shape = RoundedCornerShape(4.dp)
+            )
             .padding(horizontal = 16.dp)
     ) {
         val (image, description, button) = createRefs()
@@ -111,6 +119,7 @@ fun PagerScreen(
             contentDescription = "Onboarding image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
+                .clip(RoundedCornerShape(4.dp))
                 .border(
                     width = 0.5.dp,
                     color = colorResource(R.color.black),
@@ -120,8 +129,8 @@ fun PagerScreen(
                     top.linkTo(parent.top, margin = 56.dp)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    height = androidx.constraintlayout.compose.Dimension.percent(0.40f)
-                    width = androidx.constraintlayout.compose.Dimension.fillToConstraints
+                    height = Dimension.percent(0.40f)
+                    width = Dimension.fillToConstraints
                 }
         )
 
@@ -130,11 +139,17 @@ fun PagerScreen(
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
             color = colorResource(R.color.black),
-            modifier = Modifier.constrainAs(description) {
-                top.linkTo(image.bottom, margin = 16.dp)
-                start.linkTo(parent.start)
-                end.linkTo(parent.end)
-            }
+            modifier = Modifier
+                .border(
+                    width = 0.5.dp,
+                    color = colorResource(R.color.black),
+                    shape = RoundedCornerShape(4.dp)
+                )
+                .constrainAs(description) {
+                    top.linkTo(image.bottom, margin = 16.dp)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                }
         )
 
         if (isLastScreen) {

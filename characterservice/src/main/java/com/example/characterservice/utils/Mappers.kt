@@ -25,9 +25,9 @@ class DefaultCharacterListMapper : CharacterMappers {
             gender = data.gender,
             id = data.id,
             image = data.image,
-            location = data.location?.toLocationDomain(),
+            location = data.location.toLocationDomain(),
             name = data.name,
-            origin = data.origin?.toOriginDomain(),
+            origin = data.origin.toOriginDomain(),
             species = data.species,
             status = data.status,
             type = data.type,
@@ -36,6 +36,31 @@ class DefaultCharacterListMapper : CharacterMappers {
     }
 
 }
+
+fun CharacterDomain.toCharacter() = Character(
+    created = this.created,
+    episode = this.episode,
+    gender = this.gender,
+    id = this.id,
+    image = this.image,
+    location = (location?.toLocation()) as Location,
+    name = this.name,
+    origin = (origin?.toOrigin()) as Origin,
+    species = this.species,
+    status = this.status,
+    type = this.type,
+    url = this.url
+)
+
+fun LocationDomain.toLocation() = Location(
+    name = this.name,
+    url = this.url
+)
+
+fun OriginDomain.toOrigin() = Origin(
+    name = this.name,
+    url = this.url
+)
 
 fun Location.toLocationDomain() = LocationDomain(
     name = this.name,
@@ -63,6 +88,7 @@ class StringListConverter {
         }
     }
 }
+
 class LocationConverter {
 
     @TypeConverter

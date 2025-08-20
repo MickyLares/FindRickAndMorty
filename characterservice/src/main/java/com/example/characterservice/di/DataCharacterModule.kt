@@ -1,6 +1,7 @@
 package com.example.characterservice.di
 
 import androidx.room.Room
+import com.example.characterservice.data.dataSource.implementation.LocalCharacterDataSource
 import com.example.characterservice.data.dataSource.implementation.RemoteCharacterDataSource
 import com.example.characterservice.data.dataSource.interfaces.CharacterDataSource
 import com.example.characterservice.data.repository.CharacterRepository
@@ -32,6 +33,7 @@ val dataCharacterModule = module {
     }
     single <CharacterApi>{ KtorCharacterApi(get()) }
     single<CharacterDao> { get<AppDataBase>().characterDao() }
-    single<CharacterRepository> { DefaultCharacterRepository(get()) }
-    single<CharacterDataSource> { RemoteCharacterDataSource(get(), get()) }
+    single<CharacterRepository> { DefaultCharacterRepository(get(), get()) }
+    single<CharacterDataSource.Remote> { RemoteCharacterDataSource(get()) }
+    single <CharacterDataSource.Local>{ LocalCharacterDataSource(get()) }
 }

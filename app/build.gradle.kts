@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.foundation)
+    implementation(libs.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -83,10 +85,14 @@ dependencies {
     implementation(libs.androidx.animation)
     implementation(libs.constraintlayout.compose)
 
-    implementation("androidx.navigation:navigation-compose:2.8.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+    implementation(libs.androidx.navigation.compose.v280)
+    implementation(libs.kotlinx.serialization.json.v171)
 
     kapt(libs.room.compiler)
+
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+    implementation(libs.androidx.compose)
 
 
 

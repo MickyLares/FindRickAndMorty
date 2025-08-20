@@ -1,11 +1,12 @@
 package com.example.rickandmortyfinder.presentation.main
 
-import android.util.Log
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
+import com.example.rickandmortyfinder.presentation.main.home.HomeScreen
+import com.example.rickandmortyfinder.presentation.main.onBoarding.OnBoardingScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -20,7 +21,9 @@ fun MainScreen(
             OnBoardingScreen(navController, viewModel)
         }
         false -> {
-            Text("parece que no entra en el onBoarding")
+            HomeScreen(viewModel){ id ->
+                toDetailCharacter.invoke(id)
+            }
         }
     }
 }

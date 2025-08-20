@@ -1,7 +1,16 @@
 package com.example.characterservice.data.dataSource.interfaces
 import com.example.characterservice.data.model.Character
+import kotlinx.coroutines.flow.Flow
+
 interface CharacterDataSource {
-    suspend fun fetchCharacter(): List<Character>
-    suspend fun saveCharacter(chacters: List<Character>)
-    suspend fun getCharacterById(id:Int): Character?
+    interface Remote{
+        suspend fun fetchCharacter(): List<Character>
+    }
+    interface Local{
+        suspend fun saveCharacter(chacters: List<Character>)
+        suspend fun updateCharacter(character: Character)
+
+        fun getAllCharactersFlow(): Flow<List<Character>>
+        fun getCharacterByIdFlow(id: Int): Flow<Character?>
+    }
 }
