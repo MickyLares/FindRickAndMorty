@@ -1,4 +1,4 @@
-package com.example.rickandmortyfinder.presentation.main.DetailsCharacters
+package com.example.rickandmortyfinder.presentation.details.DetailsCharacters
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background

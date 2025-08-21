@@ -12,10 +12,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val getCharacterUseCase: GetCharacterUseCase,
+    getCharacterUseCase: GetCharacterUseCase,
     private val preferenceRepository: PreferenceRepository
 ) : ViewModel() {
-    private val _characters = MutableStateFlow<List<CharacterDomain>>(emptyList())
     private val _showOnBoarding = MutableStateFlow<Boolean>(true)
     val showOnBoarding: StateFlow<Boolean> = _showOnBoarding
 

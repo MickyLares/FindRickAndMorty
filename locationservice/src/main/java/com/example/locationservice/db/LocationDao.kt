@@ -5,12 +5,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.locationservice.data.model.Location
+import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface LocationDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveLocation(locations: List<Location>)
     @Query("SELECT * FROM locations")
-    suspend fun getAllLocations(): List<Location>
+    fun getAllLocations(): Flow<List<Location>>
     @Query("SELECT * FROM locations WHERE id == :id LIMIT 1")
-    suspend fun getLocationByid(id: Int): Location?
+    fun getLocationByid(id: Int): Flow<Location?>
 }

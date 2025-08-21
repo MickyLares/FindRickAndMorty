@@ -11,8 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.rickandmortyfinder.presentation.main.DetailsCharacters.detailCharacterScreen
+import com.example.rickandmortyfinder.presentation.details.DetailsCharacters.detailCharacterScreen
+import com.example.rickandmortyfinder.presentation.location.LocationScreen
 import com.example.rickandmortyfinder.presentation.main.MainScreen
+import com.example.rickandmortyfinder.util.BottomBarDestination
 import kotlinx.serialization.Serializable
 
 
@@ -38,7 +40,18 @@ fun App() {
             val navController = rememberNavController()
             NavHost(navController = navController, startDestination = MainDestination) {
                 composable<MainDestination> {
-                    MainScreen(navController) { id ->
+                    MainScreen(navController, onMenuClick = {
+                        route->
+                        when(route){
+                            BottomBarDestination.HOME.route -> navController.navigate(MainDestination){
+                                popUpTo ( navController.graph.startDestinationId ){inclusive = true}
+                            }
+                            BottomBarDestination.LOCATION.route -> navController.navigate(LocationDestination) {
+                                popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                            }
+                        }
+
+                    }) { id ->
                        navController.navigate(DetailsCharacterDestination(id))
                     }
                 }
@@ -46,6 +59,21 @@ fun App() {
                     detailCharacterScreen(id = navBackStackentry.toRoute<DetailsCharacterDestination>().id) {
                         navController.popBackStack()
                     }
+                }
+                composable<LocationDestination> {
+                    LocationScreen(
+                        onNavigate = { route->
+                            when(route){
+                                BottomBarDestination.HOME.route -> navController.navigate(MainDestination){
+                                    popUpTo ( navController.graph.startDestinationId ){inclusive = true}
+                                }
+                                BottomBarDestination.LOCATION.route -> navController.navigate(LocationDestination) {
+                                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                                }
+                            }
+
+                        }
+                    ) { }
                 }
             }
         }

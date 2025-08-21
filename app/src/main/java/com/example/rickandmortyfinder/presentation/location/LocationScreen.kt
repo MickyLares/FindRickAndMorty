@@ -1,6 +1,7 @@
-package com.example.rickandmortyfinder.presentation.main.home
+package com.example.rickandmortyfinder.presentation.location
 
 import CarouselHome
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.LocationOn
@@ -10,23 +11,21 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import com.example.rickandmortyfinder.model.BottomMenuItem
-import com.example.rickandmortyfinder.presentation.main.MainViewModel
 import com.example.rickandmortyfinder.util.BottomBarDestination
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun HomeScreen(
-    viewModel: MainViewModel,
+fun LocationScreen(
+    viewModel: LocationViewModel = koinViewModel<LocationViewModel>(),
     onNavigate: (String) -> Unit = {},
-    onClickCard: (id: Int) -> Unit
+    onClick: (id: Int) -> Unit
 ) {
-
     var selecteItem by remember { mutableIntStateOf(0) }
     val items = listOf(
         BottomMenuItem("Home", Icons.Default.Home, BottomBarDestination.HOME.route),
@@ -52,10 +51,19 @@ fun HomeScreen(
         }
     ) { paddingValues ->
 
+        BodyLocations(paddingValues, viewModel)
 
-        CarouselHome(paddingValues, viewModel) { id ->
-            onClickCard.invoke(id)
-        }
 
+    }
+
+}
+
+@Composable
+fun BodyLocations(paddingValues: PaddingValues, viewmodel: LocationViewModel) {
+    val lista by viewmodel.locations.collectAsState()
+    if (lista.isNullOrEmpty().not()) {
+        Text("Yupi")
+    } else {
+        Text("ohhhhh no")
     }
 }

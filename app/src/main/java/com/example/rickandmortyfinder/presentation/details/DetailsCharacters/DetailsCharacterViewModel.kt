@@ -1,4 +1,4 @@
-package com.example.rickandmortyfinder.presentation.main.DetailsCharacters
+package com.example.rickandmortyfinder.presentation.details.DetailsCharacters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

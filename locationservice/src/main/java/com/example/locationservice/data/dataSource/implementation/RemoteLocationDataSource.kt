@@ -4,23 +4,31 @@ import com.example.locationservice.data.dataSource.interfaces.LocationDataSource
 import com.example.locationservice.data.service.LocationApi
 import com.example.locationservice.data.model.Location
 import com.example.locationservice.db.LocationDao
+import kotlinx.coroutines.flow.Flow
 
 class RemoteLocationDataSource(
     private val locationApi: LocationApi,
-    private val locationDao: LocationDao
-): LocationDataSource {
+): LocationDataSource.Remote {
 
     override suspend fun fetchLocations(): List<Location> {
-        val locationsRemote = locationApi.fetchListLocations()
-        saveLocation(locationsRemote)
-        return locationDao.getAllLocations()
-    }
+         return locationApi.fetchListLocations()
 
+    }
+}
+
+class LocalLocationDataSource(private val locationDao: LocationDao): LocationDataSource.Local{
     override suspend fun saveLocation(locations: List<Location>) {
         locationDao.saveLocation(locations)
     }
 
-    override suspend fun getLocationById(id: Int): Location? {
+
+
+    override fun getAllLocationFlow(): Flow<List<Location>> {
+        return locationDao.getAllLocations()
+    }
+
+    override  fun getLocationById(id: Int): Flow<Location?> {
         return locationDao.getLocationByid(id)
     }
+
 }

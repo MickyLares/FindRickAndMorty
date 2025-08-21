@@ -2,29 +2,33 @@ package com.example.locationservice.data.repository
 
 import com.example.locationservice.data.dataSource.interfaces.LocationDataSource
 import com.example.locationservice.data.model.Location
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 interface LocationRepository {
     suspend fun init()
-    suspend fun getLocationList(): List<Location>
-    suspend fun getLocationById(id:Int): Location?
+    fun getLocationList(): Flow<List<Location>>
+    fun getLocationById(id: Int): Flow<Location?>
 }
 
 class DefaultLocationRepository(
-    private val remoteLocationDataSource: LocationDataSource
-):LocationRepository{
+    private val remoteLocationDataSource: LocationDataSource.Remote,
+    private val localLocationDataSource: LocationDataSource.Local
+) : LocationRepository {
     override suspend fun init() {
         refresh()
     }
 
-    override suspend fun getLocationList(): List<Location> {
-        return remoteLocationDataSource.fetchLocations()
+    override fun getLocationList(): Flow<List<Location>> {
+        return localLocationDataSource.getAllLocationFlow()
     }
 
-    override suspend fun getLocationById(id: Int): Location? {
-        return remoteLocationDataSource.getLocationById(id)
+    override  fun getLocationById(id: Int): Flow<Location?> {
+        return localLocationDataSource.getLocationById(id)
     }
-    private suspend fun refresh(){
-        remoteLocationDataSource.fetchLocations()
+
+    private suspend fun refresh() {
+        localLocationDataSource.saveLocation(remoteLocationDataSource.fetchLocations())
     }
 
 }

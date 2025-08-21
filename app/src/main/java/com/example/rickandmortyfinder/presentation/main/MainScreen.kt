@@ -13,15 +13,20 @@ import org.koin.compose.viewmodel.koinViewModel
 fun MainScreen(
     navController: NavController,
     viewModel: MainViewModel = koinViewModel<MainViewModel>(),
+    onMenuClick: (route: String) -> Unit,
     toDetailCharacter: (id: Int) -> Unit
-){
+) {
     val showOnBoarding by viewModel.showOnBoarding.collectAsState()
-    when(showOnBoarding){
+    when (showOnBoarding) {
         true -> {
             OnBoardingScreen(navController, viewModel)
         }
+
         false -> {
-            HomeScreen(viewModel){ id ->
+            HomeScreen(
+                viewModel = viewModel,
+                onNavigate = { route -> onMenuClick.invoke(route) }
+            ) { id ->
                 toDetailCharacter.invoke(id)
             }
         }
