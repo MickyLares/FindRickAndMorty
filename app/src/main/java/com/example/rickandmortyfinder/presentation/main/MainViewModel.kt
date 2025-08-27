@@ -2,6 +2,7 @@ package com.example.rickandmortyfinder.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.characterservice.data.repository.CharacterRepository
 import com.example.characterservice.domain.model.CharacterDomain
 import com.example.characterservice.domain.useCase.GetCharacterUseCase
 import com.example.rickandmortyfinder.data.PreferenceRepository
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     getCharacterUseCase: GetCharacterUseCase,
-    private val preferenceRepository: PreferenceRepository
+    private val preferenceRepository: PreferenceRepository,
+    private val repository: CharacterRepository
 ) : ViewModel() {
     private val _showOnBoarding = MutableStateFlow<Boolean>(true)
     val showOnBoarding: StateFlow<Boolean> = _showOnBoarding
@@ -26,9 +28,18 @@ class MainViewModel(
         )
 
     init {
-        getPreferences()
-    }
+        viewModelScope.launch {
+            repository.init()
+            getPreferences()
+        }
 
+    }
+    fun start(){
+        viewModelScope.launch {
+            repository.init()
+            getPreferences()
+        }
+    }
     private fun getPreferences() {
         viewModelScope.launch {
             val pref = preferenceRepository.getPreference()

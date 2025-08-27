@@ -76,7 +76,7 @@ fun CarouselHome(
                 ),
                 border = BorderStroke(
                     1.dp,
-                    color = if (character.status.equals("Alive")) Color.Green.copy(0.48f) else Color.Red
+                    color = if (character.status == "Alive") Color.Green.copy(0.48f) else Color.Red
                 ),
                 elevation = CardDefaults.cardElevation(defaultElevation = if (pageOffset < 0.5f) 16.dp else 2.dp)
             ) {
@@ -95,9 +95,9 @@ fun CarouselHome(
                         previewPlaceholder = painterResource(R.drawable.rick69)
                     )
                     BodyCard(
-                        character.name ?: "",
+                        character.name,
                         character.location?.name ?: "",
-                        status = character.status ?: ""
+                        status = character.status
                     )
                 }
             }

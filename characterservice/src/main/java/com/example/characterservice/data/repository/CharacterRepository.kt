@@ -1,4 +1,5 @@
 package com.example.characterservice.data.repository
+import android.util.Log
 import com.example.characterservice.data.dataSource.implementation.RemoteCharacterDataSource
 import com.example.characterservice.data.dataSource.interfaces.CharacterDataSource
 import com.example.characterservice.data.model.Character
@@ -36,6 +37,7 @@ class DefaultCharacterRepository(
 
     private suspend fun refresh(){
         val remoteCharacters = remoteCharacterDataSource.fetchCharacter()
+        Log.d("testDB", "${remoteCharacters.toString()} ")
         localCharacterDataSource.saveCharacter(remoteCharacters)
     }
 

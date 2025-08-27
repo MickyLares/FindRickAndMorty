@@ -17,6 +17,7 @@ fun MainScreen(
     toDetailCharacter: (id: Int) -> Unit
 ) {
     val showOnBoarding by viewModel.showOnBoarding.collectAsState()
+    viewModel.start()
     when (showOnBoarding) {
         true -> {
             OnBoardingScreen(navController, viewModel)
